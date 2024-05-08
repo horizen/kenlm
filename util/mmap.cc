@@ -105,7 +105,8 @@ const int kFileFlags =
 void *MapOrThrow(std::size_t size, bool for_write, int flags, bool prefault, int fd, uint64_t offset) {
 #ifdef MAP_POPULATE // Linux specific
   if (prefault) {
-    flags |= MAP_POPULATE;
+    // FIXME disable MAP_POPULATE option, because it may caused process hang on page fault
+    //flags |= MAP_POPULATE;
   }
 #endif
 #if defined(_WIN32) || defined(_WIN64)
